@@ -11,6 +11,33 @@ import "../utils.dart";
 import "../widgets/carousel_dots_view.dart";
 import "../widgets/glossy_button.dart";
 
+/// Виджет для [HomePage], отображающий Row с кнопками в верхней части экрана.
+class AppBarWidget extends StatelessWidget {
+  const AppBarWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        GlossyIconButton(
+          // TODO: Заменить на иконку из Figma.
+          icon: CupertinoIcons.gift_fill,
+          text: "1234",
+          onPressed: () => showNotImplemented(context),
+        ),
+        GlossyIconButton(
+          icon: CupertinoIcons.bell_fill,
+          badgeText: "12",
+          onPressed: () => showNotImplemented(context),
+        ),
+      ],
+    );
+  }
+}
+
 /// Виджет для [HomePage], отображающий карусель с изображениями и текстом.
 class CarouselWidget extends HookWidget {
   const CarouselWidget({
@@ -117,30 +144,36 @@ class HomePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      child: Stack(
+      child: Column(
         children: [
-          const CarouselWidget(),
-          SafeArea(
-            left: false,
-            bottom: false,
-            right: false,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GlossyIconButton(
-                    // TODO: Заменить на иконку из Figma.
-                    icon: CupertinoIcons.gift_fill,
-                    text: "1234",
-                    onPressed: () => showNotImplemented(context),
-                  ),
-                  GlossyIconButton(
-                    icon: CupertinoIcons.bell_fill,
-                    badgeText: "12",
-                    onPressed: () => showNotImplemented(context),
-                  ),
-                ],
+          const Stack(
+            clipBehavior: Clip.none,
+            children: [
+              SizedBox(
+                height: 443,
+                child: CarouselWidget(),
+              ),
+              SafeArea(
+                left: false,
+                bottom: false,
+                right: false,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(20, 8, 20, 0),
+                  child: AppBarWidget(),
+                ),
+              ),
+            ],
+          ),
+          Transform.translate(
+            offset: const Offset(0, -27),
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color(0xffF9FAFD),
+                borderRadius: BorderRadius.circular(32),
+              ),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 27,
               ),
             ),
           ),
