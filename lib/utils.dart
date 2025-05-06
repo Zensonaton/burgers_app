@@ -24,3 +24,13 @@ void showNotImplemented(BuildContext context) {
     },
   );
 }
+
+/// Метод, форматирующий числа, добавляя пробелы в качестве разделителей тысяч.
+///
+/// Например, 1234567 будет преобразовано в "1 234 567".
+String formatNumber(int number) {
+  return number.toString().replaceAllMapped(
+        RegExp(r"(\d)(?=(\d{3})+(?!\d))"),
+        (Match match) => "${match[1]} ",
+      );
+}

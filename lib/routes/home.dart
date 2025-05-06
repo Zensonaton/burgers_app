@@ -10,6 +10,7 @@ import "../models/story.dart";
 import "../utils.dart";
 import "../widgets/carousel_dots_view.dart";
 import "../widgets/glossy_button.dart";
+import "../widgets/loyalty_card.dart";
 
 /// Виджет для [HomePage], отображающий Row с кнопками в верхней части экрана.
 class AppBarWidget extends StatelessWidget {
@@ -144,7 +145,7 @@ class HomePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      child: Column(
+      child: ListView(
         children: [
           const Stack(
             clipBehavior: Clip.none,
@@ -167,6 +168,7 @@ class HomePage extends HookWidget {
           Transform.translate(
             offset: const Offset(0, -27),
             child: Container(
+              width: MediaQuery.sizeOf(context).width,
               decoration: BoxDecoration(
                 color: const Color(0xffF9FAFD),
                 borderRadius: BorderRadius.circular(32),
@@ -174,6 +176,15 @@ class HomePage extends HookWidget {
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 27,
+              ),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  LoyaltyCardWidget(
+                    cardID: "230365398",
+                    bonusCount: 5689,
+                  ),
+                ],
               ),
             ),
           ),
