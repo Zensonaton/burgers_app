@@ -1,5 +1,7 @@
 import "package:flutter/cupertino.dart";
 
+import "routes/home.dart";
+
 /// Главный виджет приложения, отображающий само приложение.
 class MainApp extends StatelessWidget {
   const MainApp({
@@ -9,18 +11,15 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CupertinoApp(
-      home: CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          middle: Text(
-            "Home",
-          ),
-        ),
-        child: Center(
-          child: Text(
-            "Hello, world!",
+      theme: CupertinoThemeData(
+        brightness: Brightness.light,
+        textTheme: CupertinoTextThemeData(
+          textStyle: TextStyle(
+            fontFamily: "Onest",
           ),
         ),
       ),
+      home: HomePage(),
     );
   }
 }
