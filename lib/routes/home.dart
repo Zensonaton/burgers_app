@@ -7,7 +7,9 @@ import "package:flutter_hooks/flutter_hooks.dart";
 
 import "../consts.dart";
 import "../models/story.dart";
+import "../utils.dart";
 import "../widgets/carousel_dots_view.dart";
+import "../widgets/glossy_button.dart";
 
 /// Виджет для [HomePage], отображающий карусель с изображениями и текстом.
 class CarouselWidget extends HookWidget {
@@ -114,8 +116,36 @@ class HomePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CupertinoPageScaffold(
-      child: CarouselWidget(),
+    return CupertinoPageScaffold(
+      child: Stack(
+        children: [
+          const CarouselWidget(),
+          SafeArea(
+            left: false,
+            bottom: false,
+            right: false,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GlossyIconButton(
+                    // TODO: Заменить на иконку из Figma.
+                    icon: CupertinoIcons.gift_fill,
+                    text: "1234",
+                    onPressed: () => showNotImplemented(context),
+                  ),
+                  GlossyIconButton(
+                    icon: CupertinoIcons.bell_fill,
+                    badgeText: "12",
+                    onPressed: () => showNotImplemented(context),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
