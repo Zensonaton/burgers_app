@@ -1,6 +1,6 @@
 import "dart:ui";
 
-import "package:flutter/material.dart";
+import "package:flutter/cupertino.dart";
 
 /// Виджет, репрезентирующий кнопку с эффектом глянца.
 class GlossyIconButton extends StatelessWidget {
@@ -59,13 +59,13 @@ class GlossyIconButton extends StatelessWidget {
                       if (icon != null)
                         Icon(
                           icon,
-                          color: Colors.white,
+                          color: CupertinoColors.white,
                         ),
                       if (text != null)
                         Text(
                           text!,
                           style: const TextStyle(
-                            color: Colors.white,
+                            color: CupertinoColors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                             height: 1.2,
@@ -93,7 +93,7 @@ class GlossyIconButton extends StatelessWidget {
                     child: Text(
                       badgeText!,
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: CupertinoColors.white,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         letterSpacing: 0,

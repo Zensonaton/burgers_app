@@ -1,3 +1,4 @@
+import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 
 /// Виджет для [CarouselDotsView], отображающий отдельную "точку".
@@ -26,7 +27,7 @@ class _Dot extends StatelessWidget {
             child: Container(
               width: 15,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: CupertinoColors.white,
                 borderRadius: BorderRadius.circular(4),
               ),
             ),
