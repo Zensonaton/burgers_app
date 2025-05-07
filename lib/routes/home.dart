@@ -151,77 +151,82 @@ class HomePage extends HookWidget {
       child: Stack(
         children: [
           Expanded(
-            child: ListView(
-              padding: EdgeInsets.only(
-                bottom: BottomNavigationBar.getHeightWithPadding(context),
+            child: ScrollConfiguration(
+              behavior: ScrollConfiguration.of(context).copyWith(
+                overscroll: false,
               ),
-              children: [
-                const Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    SizedBox(
-                      height: 443,
-                      child: CarouselWidget(),
-                    ),
-                    SafeArea(
-                      left: false,
-                      bottom: false,
-                      right: false,
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(20, 8, 20, 0),
-                        child: AppBarWidget(),
+              child: ListView(
+                padding: EdgeInsets.only(
+                  bottom: BottomNavigationBar.getHeightWithPadding(context),
+                ),
+                children: [
+                  const Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      SizedBox(
+                        height: 443,
+                        child: CarouselWidget(),
+                      ),
+                      SafeArea(
+                        left: false,
+                        bottom: false,
+                        right: false,
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(20, 8, 20, 0),
+                          child: AppBarWidget(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Transform.translate(
+                    offset: const Offset(0, -27),
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width,
+                      decoration: BoxDecoration(
+                        color: const Color(0xffF9FAFD),
+                        borderRadius: BorderRadius.circular(32),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 27,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: 20,
+                        children: [
+                          const LoyaltyCardWidget(
+                            cardID: "230365398",
+                            bonusCount: 5689,
+                          ),
+                          GridView.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisExtent: 120,
+                              mainAxisSpacing: 12,
+                              crossAxisSpacing: 12,
+                            ),
+                            // @Zensonaton: Я знаю, что shrinkWrap это зло. Не знаю, можно ли по-другому это реализовать.
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+
+                            itemCount: actionBlocks.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final block = actionBlocks[index];
+
+                              return CardWidget(
+                                title: block.title,
+                                description: block.description,
+                                onPressed: () => showNotImplemented(context),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-                Transform.translate(
-                  offset: const Offset(0, -27),
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width,
-                    decoration: BoxDecoration(
-                      color: const Color(0xffF9FAFD),
-                      borderRadius: BorderRadius.circular(32),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 27,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      spacing: 20,
-                      children: [
-                        const LoyaltyCardWidget(
-                          cardID: "230365398",
-                          bonusCount: 5689,
-                        ),
-                        GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisExtent: 120,
-                            mainAxisSpacing: 12,
-                            crossAxisSpacing: 12,
-                          ),
-                          // @Zensonaton: Я знаю, что shrinkWrap это зло. Не знаю, можно ли по-другому это реализовать.
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-
-                          itemCount: actionBlocks.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final block = actionBlocks[index];
-
-                            return CardWidget(
-                              title: block.title,
-                              description: block.description,
-                              onPressed: () => showNotImplemented(context),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           Align(
