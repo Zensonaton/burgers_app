@@ -11,15 +11,35 @@ class _Dot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Сделать "растянутый" вид точки, если она активна, с прогрессом внутри точки.
-
-    final color = isActive ? Colors.white : const Color(0x817F8440);
+    if (isActive) {
+      return Container(
+        width: 24,
+        height: 8,
+        decoration: BoxDecoration(
+          color: const Color(0x817F8440),
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(1),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              width: 15,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
 
     return Container(
       width: 8,
       height: 8,
       decoration: BoxDecoration(
-        color: color,
+        color: const Color(0x817F8440),
         borderRadius: BorderRadius.circular(4),
       ),
     );
