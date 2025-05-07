@@ -2,12 +2,13 @@ import "dart:ui";
 
 import "package:carousel_slider/carousel_slider.dart";
 import "package:flutter/cupertino.dart";
-import "package:flutter/material.dart";
 import "package:flutter_hooks/flutter_hooks.dart";
 
 import "../consts.dart";
 import "../models/story.dart";
 import "../utils.dart";
+import "../widgets/bottom_navigation_bar.dart"
+    show BottomNavigationBar, NavigationBarItem;
 import "../widgets/card.dart";
 import "../widgets/carousel_dots_view.dart";
 import "../widgets/glossy_button.dart";
@@ -111,7 +112,7 @@ class CarouselWidget extends HookWidget {
                       story.value.title,
                       style: const TextStyle(
                         fontSize: textSize / 12,
-                        color: Colors.white,
+                        color: CupertinoColors.white,
                         fontWeight: FontWeight.w800,
                         letterSpacing: -0.5,
                       ),
@@ -147,72 +148,111 @@ class HomePage extends HookWidget {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       resizeToAvoidBottomInset: false,
-      child: ListView(
-        padding: EdgeInsets.zero,
+      child: Stack(
         children: [
-          const Stack(
-            clipBehavior: Clip.none,
-            children: [
-              SizedBox(
-                height: 443,
-                child: CarouselWidget(),
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.only(
+                bottom: BottomNavigationBar.getHeightWithPadding(context),
               ),
-              SafeArea(
-                left: false,
-                bottom: false,
-                right: false,
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(20, 8, 20, 0),
-                  child: AppBarWidget(),
-                ),
-              ),
-            ],
-          ),
-          Transform.translate(
-            offset: const Offset(0, -27),
-            child: Container(
-              width: MediaQuery.sizeOf(context).width,
-              decoration: BoxDecoration(
-                color: const Color(0xffF9FAFD),
-                borderRadius: BorderRadius.circular(32),
-              ),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 27,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: 20,
-                children: [
-                  const LoyaltyCardWidget(
-                    cardID: "230365398",
-                    bonusCount: 5689,
-                  ),
-                  GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisExtent: 120,
-                      mainAxisSpacing: 12,
-                      crossAxisSpacing: 12,
+              children: [
+                const Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    SizedBox(
+                      height: 443,
+                      child: CarouselWidget(),
                     ),
-                    // @Zensonaton: Я знаю, что shrinkWrap это зло. Не знаю, можно ли по-другому это реализовать.
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
+                    SafeArea(
+                      left: false,
+                      bottom: false,
+                      right: false,
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(20, 8, 20, 0),
+                        child: AppBarWidget(),
+                      ),
+                    ),
+                  ],
+                ),
+                Transform.translate(
+                  offset: const Offset(0, -27),
+                  child: Container(
+                    width: MediaQuery.sizeOf(context).width,
+                    decoration: BoxDecoration(
+                      color: const Color(0xffF9FAFD),
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 27,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      spacing: 20,
+                      children: [
+                        const LoyaltyCardWidget(
+                          cardID: "230365398",
+                          bonusCount: 5689,
+                        ),
+                        GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisExtent: 120,
+                            mainAxisSpacing: 12,
+                            crossAxisSpacing: 12,
+                          ),
+                          // @Zensonaton: Я знаю, что shrinkWrap это зло. Не знаю, можно ли по-другому это реализовать.
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
 
-                    itemCount: actionBlocks.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final block = actionBlocks[index];
+                          itemCount: actionBlocks.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final block = actionBlocks[index];
 
-                      return CardWidget(
-                        title: block.title,
-                        description: block.description,
-                        onPressed: () => showNotImplemented(context),
-                      );
-                    },
+                            return CardWidget(
+                              title: block.title,
+                              description: block.description,
+                              onPressed: () => showNotImplemented(context),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ],
-              ),
+                ),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: BottomNavigationBar(
+              selectedIndex: 0,
+              onItemSelected: (_) => showNotImplemented(context),
+              items: [
+                // TODO: Использовать иконки из Figma.
+
+                const NavigationBarItem(
+                  icon: CupertinoIcons.house_fill,
+                  label: "Главная",
+                ),
+                const NavigationBarItem(
+                  icon: CupertinoIcons.gift_fill,
+                  label: "Бонусы",
+                ),
+                const NavigationBarItem(
+                  icon: CupertinoIcons.bell_fill,
+                  label: "Доставка",
+                ),
+                const NavigationBarItem(
+                  icon: CupertinoIcons.location_solid,
+                  label: "Рестораны",
+                ),
+                const NavigationBarItem(
+                  icon: CupertinoIcons.person_fill,
+                  label: "Профиль",
+                ),
+              ],
             ),
           ),
         ],
