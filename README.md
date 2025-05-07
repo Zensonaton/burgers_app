@@ -11,7 +11,7 @@
 
 ## Содержание репозитория
 
-Stack: Flutter (Dart), flutter_hooks.
+Stack: Flutter (Dart).
 
 ## Запуск приложения
 
