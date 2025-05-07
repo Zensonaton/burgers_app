@@ -1,3 +1,6 @@
+import "package:flutter/foundation.dart";
+
+import "models/action_block.dart";
 import "models/story.dart";
 
 /// Список из всех доступных историй ([Story]), отображаемых на главном экране.
@@ -5,7 +8,7 @@ import "models/story.dart";
 /// @Zensonaton: изначально, я хотел реализовать Provider вместо этой const-переменной,
 /// но, поскольку тут не требуется использование какого-либо State Management'а, я решил
 /// этого не делать.
-List<Story> stories = [
+final List<Story> stories = [
   Story(
     title: "Мастер-Класс по сборке бургеров!",
     imageName: "burgers.png",
@@ -32,6 +35,34 @@ List<Story> stories = [
     imageName: "vareniki.png",
     buttonText: "Проверить, с чем они",
   ),
+];
+
+/// Список из карточек на главном экране, нажатие которых открывает что-то.
+final List<ActionBlock> actionBlocks = [
+  ActionBlock(
+    title: "Меню",
+    description: "Переход на внешнее меню",
+  ),
+  ActionBlock(
+    title: "Отзыв",
+    description: "Оставить отзыв о посещении",
+  ),
+  ActionBlock(
+    title: "Сертификат",
+    description: "Подарочный сертификат себе или другу",
+  ),
+  ActionBlock(
+    title: "Сайт",
+    description: "Переход на сайт ресторана",
+  ),
+
+  // Debug.
+  if (kDebugMode)
+    ActionBlock(
+      title: "Супер-дупер-мупер-мега длинное название",
+      description:
+          "Вы удивитесь, но это не шутка! Это описание очень, очень и очень, действительно длинное!",
+    ),
 ];
 
 /// Магическая константа, определяющая размер текстов. Чаще всего, это значение делится на что-то, чтобы компенсировать большой размер.

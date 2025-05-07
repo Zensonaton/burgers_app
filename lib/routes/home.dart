@@ -8,6 +8,7 @@ import "package:flutter_hooks/flutter_hooks.dart";
 import "../consts.dart";
 import "../models/story.dart";
 import "../utils.dart";
+import "../widgets/card.dart";
 import "../widgets/carousel_dots_view.dart";
 import "../widgets/glossy_button.dart";
 import "../widgets/loyalty_card.dart";
@@ -145,7 +146,9 @@ class HomePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      resizeToAvoidBottomInset: false,
       child: ListView(
+        padding: EdgeInsets.zero,
         children: [
           const Stack(
             clipBehavior: Clip.none,
@@ -177,12 +180,36 @@ class HomePage extends HookWidget {
                 horizontal: 20,
                 vertical: 27,
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 20,
                 children: [
-                  LoyaltyCardWidget(
+                  const LoyaltyCardWidget(
                     cardID: "230365398",
                     bonusCount: 5689,
+                  ),
+                  GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisExtent: 120,
+                      mainAxisSpacing: 12,
+                      crossAxisSpacing: 12,
+                    ),
+                    // @Zensonaton: Я знаю, что shrinkWrap это зло. Не знаю, можно ли по-другому это реализовать.
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+
+                    itemCount: actionBlocks.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final block = actionBlocks[index];
+
+                      return CardWidget(
+                        title: block.title,
+                        description: block.description,
+                        onPressed: () => showNotImplemented(context),
+                      );
+                    },
                   ),
                 ],
               ),
