@@ -105,7 +105,7 @@ class LoyaltyCardWidget extends StatelessWidget {
     return Container(
       height: 180,
       decoration: BoxDecoration(
-        color: const Color(0xff497EE0),
+        color: const Color(0xFF497EE0),
         borderRadius: BorderRadius.circular(20),
         image: const DecorationImage(
           image: AssetImage(

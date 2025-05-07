@@ -41,9 +41,9 @@ class NavigationBarItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final iconColor =
-        isActive ? const Color(0xff497EE0) : const Color(0xffC7C5CE);
+        isActive ? const Color(0xFF497EE0) : const Color(0xFFC7C5CE);
     final textColor =
-        isActive ? const Color(0xff497EE0) : const Color(0xff959398);
+        isActive ? const Color(0xFF497EE0) : const Color(0xFF959398);
 
     // @Zensonaton: здесь у меня не получилось по какой-то причине использовать точно такие же значения размеров, и я не уверен почему.
 
@@ -134,32 +134,39 @@ class BottomNavigationBar extends StatelessWidget {
             color: Color(0xE6F2F4F8),
             borderRadius: borderRadius,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const Flexible(
-                fit: FlexFit.tight,
-                child: SizedBox(
-                  width: 40,
-                ),
-              ),
-              for (NavigationBarItem item in items)
-                Expanded(
-                  flex: 2,
-                  child: NavigationBarItemWidget(
-                    label: item.label!,
-                    icon: item.icon,
-                    isActive: items.indexOf(item) == selectedIndex,
-                    onPressed: () => onItemSelected?.call(items.indexOf(item)),
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: SizedBox(
+              height: height,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const Flexible(
+                    fit: FlexFit.tight,
+                    child: SizedBox(
+                      width: 40,
+                    ),
                   ),
-                ),
-              const Flexible(
-                fit: FlexFit.tight,
-                child: SizedBox(
-                  width: 40,
-                ),
+                  for (NavigationBarItem item in items)
+                    Expanded(
+                      flex: 2,
+                      child: NavigationBarItemWidget(
+                        label: item.label!,
+                        icon: item.icon,
+                        isActive: items.indexOf(item) == selectedIndex,
+                        onPressed: () =>
+                            onItemSelected?.call(items.indexOf(item)),
+                      ),
+                    ),
+                  const Flexible(
+                    fit: FlexFit.tight,
+                    child: SizedBox(
+                      width: 40,
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

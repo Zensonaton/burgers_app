@@ -86,7 +86,7 @@ class GlossyIconButton extends StatelessWidget {
                     minHeight: 24,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xff497EE0),
+                    color: const Color(0xFF497EE0),
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: Center(
