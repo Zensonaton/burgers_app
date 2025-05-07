@@ -36,6 +36,7 @@ class _CardInfo extends StatelessWidget {
         Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 4,
           children: [
             const Text(
               "Карта уровень VIP",
@@ -60,6 +61,7 @@ class _CardInfo extends StatelessWidget {
         Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 4,
           children: [
             Text(
               formatNumber(bonusCount),
